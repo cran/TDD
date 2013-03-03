@@ -10,7 +10,7 @@
 }
 \usage{
 MatchCoefDPZ(PZ, dt, N, niter = 50000, burn = 0, sigfac = 1, fh =
-0.25/dt, k = 0.001)
+0.25/dt, k = 0.001, verbose = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,6 +26,8 @@ MatchCoefDPZ(PZ, dt, N, niter = 50000, burn = 0, sigfac = 1, fh =
   \item{k}{Weight to give to misfit for frequencies over fh--should be
     low to prevent high frequencies from being matched at the expense of
     low frequencies}
+  \item{verbose}{Logical: if TRUE, progress updates are printed to the
+    screen}
 }
 \details{
   Large N allow it to match very low frequencies, but take longer to
@@ -68,7 +70,8 @@ MatchCoefDPZ(PZ, dt, N, niter = 50000, burn = 0, sigfac = 1, fh =
 \examples{
 # Response of Guralp CMG-40T
 
-PZ = list(poles = c(-0.149 + 0.149i, -0.149 - 0.149i, -503, -1010, -1130), zeros = c(0, 0), Knorm = 574095649, Sense = 800)
+PZ = list(poles = c(-0.149 + 0.149i, -0.149 - 0.149i, -503, -1010,
+-1130), zeros = c(0, 0), Knorm = 574095649, Sense = 800)
 # MatchCoefDPZ(PZ, dt = 0.01, N = 10000) # takes minutes to run
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

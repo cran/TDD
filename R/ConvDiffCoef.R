@@ -1,5 +1,5 @@
 ConvDiffCoef = function(db, dt){
-  require(pracma)
+#  require(pracma)
 
   # Make db real if its imaginary part is small; otherwise error
   if(sum(abs(Im(db))) < sum(abs(Re(db))/1000)){

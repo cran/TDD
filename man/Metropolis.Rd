@@ -6,7 +6,8 @@
   determine an optimal model to fit some data set.
 }
 \usage{
-Metropolis(loglikelihood, sigma, m1, niter, gen, logproposal, logprior = function(x) 0, burn = 0, save_int = 10, ...)
+Metropolis(loglikelihood, sigma, m1, niter, gen, logproposal, logprior =
+function(x) 0, burn = 0, save_int = 10, verbose, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,6 +24,8 @@ Metropolis(loglikelihood, sigma, m1, niter, gen, logproposal, logprior = functio
     distribution value of a model}
   \item{burn}{Initial "burn-in" period from which results are not saved}
   \item{save_int}{Number of iterations between saved models}
+  \item{verbose}{Logical: if TRUE, progress updates are printed to the
+    screen}
   \item{...}{Parameters to pass to loglikelihood}
 }
 \details{

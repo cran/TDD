@@ -21,6 +21,11 @@ common sample intervals.
       (rad/s)}
     \item{nz}{Number of zeros}
     \item{dt}{Sample interval for this response (s)}
+    \item{fmax}{Maximum frequency for which this digital response
+      matches the true analog response of the sensor within 1\%}
+    \item{Zpg}{Zpg-class element (from package 'signal') giving the
+      digital response of the filter in terms of its zeros and poles (in
+      Z-transform space) and gain.}
   }
 }
 \details{Seismometers are numbered as follows:
@@ -44,6 +49,9 @@ common sample intervals.
 
   Short-period Seismometers:
   14:  Guralp CMG-40T (1 s)
+
+  Digital responses are provided for the following six sample intervals
+  (in seconds): 1, 0.1, 0.05, 0.025, 0.02, 0.01.
 }
 \note{
   The STS-2 and Trillium 240 come in multiple generations, each with a
@@ -66,6 +74,6 @@ common sample intervals.
 \examples{
 # 40T, 0.01-s response:
 data(DPZLIST)
-PZ = DPZLIST[[12]][[6]]
+DPZ = DPZLIST[[12]][[6]]
 }
 \keyword{datasets}

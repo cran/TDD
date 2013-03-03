@@ -1,4 +1,4 @@
-Metropolis = function(loglikelihood, sigma, m1, niter, gen, logproposal, logprior = function(x) 0, burn = 0, save_int = 10, ...){
+Metropolis = function(loglikelihood, sigma, m1, niter, gen, logproposal, logprior = function(x) 0, burn = 0, save_int = 10, verbose = TRUE, ...){
   # logprior: function(x) given prior opinions on model likelihood
   # loglikelihood: function(x, ...) giving likelihood of model (similar to misfit)
   # sigma: standard deviations of model elements used for calculating proposal distribution--exp(-0.5*sum((x-y)^2/sigma^2))
@@ -73,7 +73,9 @@ Metropolis = function(loglikelihood, sigma, m1, niter, gen, logproposal, logprio
     # print updates to screen
     if(i/1000 == floor(i/1000)){
       uncentered_cor = function(x, y)sum(x*y)/sqrt(sum(x^2)*sum(y^2)+1e-100)
-      print(paste(i, 'of', niter, ';',  signif(q0, 4), ';', signif(q2, 4), ';', signif(best$l, 4), ';', action, ';', sum(acceptance)/min(100, i)))#, ';', mean(apply(modmat_nosave[max(i-1000,1):max(i-1,2),], 1, uncentered_cor, m1))))
+      if(verbose){
+          print(paste(i, 'of', niter, ';',  signif(q0, 4), ';', signif(q2, 4), ';', signif(best$l, 4), ';', action, ';', sum(acceptance)/min(100, i)))#, ';', mean(apply(modmat_nosave[max(i-1000,1):max(i-1,2),], 1, uncentered_cor, m1))))
+      }
     }    
     # save result
     if(i >= burn && i/save_int == floor(i/save_int)){

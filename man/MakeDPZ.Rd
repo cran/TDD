@@ -3,10 +3,16 @@
 \title{Calculate Find Digital Match to Analog Poles/Zeros}
 \description{Calculates digital poles and zeros to match a continuous
   instrument response given in poles, zeros, and sensitivity.
-  Discretization effects mean that the given poles and zeros do not work
+  Discretization effects mean that the analog poles and zeros do not work
   for finite sample rates, with discrepancies increasing as the time
-  interval increases.  This function uses a Markov Chain Monte Carlo (MCMC)
-  routine to match the responses.}
+  interval increases.
+
+  This function uses two methods to match the responses.  The first 
+  uses a finite difference approximation and Markov Chain Monte Carlo
+  (MCMC) routine to optimize the response.  The second uses the bilinear
+  transform to approximate the analog response.  Whichever of these
+  responses best matches the analog response is used; usually, the
+  first method provides a better fit.}
 \usage{
 MakeDPZ(PZ, dt, fmin = 1/360, niter = 50000, ...)
 }
@@ -38,13 +44,18 @@ MakeDPZ(PZ, dt, fmin = 1/360, niter = 50000, ...)
 
 }
 \value{List including the following elements:
-  \item{poles}{Vector of "digital poles" (rad/s)}
-  \item{zeros}{Vector of "digital zeros" (rad/s)}
+  \item{poles}{Vector of "analog poles" (rad/s)}
+  \item{zeros}{Vector of "analog zeros" (rad/s)}
   \item{np}{Number of poles}
   \item{nz}{Number of zeros}
   \item{Knorm}{Normalization constant}
   \item{Sense}{Sensitivity (V * s/m)}
   \item{dt}{Sample interval (s)}
+  \item{fmax}{Maximum frequency for which this digital response
+    matches the true analog response of the sensor within 1\%}
+  \item{Zpg}{Zpg-class element (from package 'signal') giving the
+    digital response of the filter in terms of its zeros and poles (in
+    Z-transform space) and gain.}
 }
 \author{Jake Anderson}
 \note{
@@ -60,7 +71,8 @@ MakeDPZ(PZ, dt, fmin = 1/360, niter = 50000, ...)
 \examples{
 # Response of Guralp CMG-40T
 
-PZ = list(poles = c(-0.149 + 0.149i, -0.149 - 0.149i, -503, -1010, -1130), zeros = c(0, 0), Knorm = 574095649, Sense = 800)
+PZ = list(poles = c(-0.149 + 0.149i, -0.149 - 0.149i, -503, -1010,
+-1130), zeros = c(0, 0), Knorm = 574095649, Sense = 800)
 # MakeDPZ(PZ, dt = 0.01, fmin = 1/60) # takes minutes to run
 
 }

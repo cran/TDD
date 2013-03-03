@@ -1,7 +1,7 @@
 PZ2Coef = function(PZ, dt){
   # takes a poles/zeros object and returns b, a coefficients for filtering.
   # note that this is just an approximation for nonzero dt!
-  require(pracma)
+#  require(pracma)
   if(length(PZ$Knorm) == 0 ){
     PZ$Knorm = 1
   }

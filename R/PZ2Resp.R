@@ -15,16 +15,17 @@ PZ2Resp = function(PZ, f, PLOT = TRUE){
   if(is.null(A0)){
     A0 = 1/max(abs(resp))
   }
-  for(i in 1:length(zeros)){
+  for(i in seq(1, length(zeros), length.out = length(zeros))){
     resp = resp * (s - zeros[i])
   }
-  for(i in 1:length(poles)){
+  for(i in seq(1, length(poles), length.out = length(poles))){
     resp = resp / (s - poles[i])
   }
   resp = resp * A0
 
   if(PLOT){
-    plot(f, abs(resp), type = 'l', ylim = max(abs(resp)) * c(0.01, 1), log = 'xy')
+      w = which(f > 0)
+    plot(f[w], abs(resp)[w], type = 'l', ylim = max(abs(resp[w])) * c(0.01, 1), log = 'xy')
   }
   invisible(resp)
 }
